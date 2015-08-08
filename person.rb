@@ -1,36 +1,49 @@
 class Person
-    attr_reader :first_name, :last_name, :gender, :title
+    attr_reader :first_name, :last_name, :gender, :profession
 
-    def initialize(first_name, last_name, gender, title)
-        @first_name = first_name
-        @last_name = last_name
-        @gender = gender
-        @title = title
+    def initialize(first_name, last_name, gender, profession)
+        @first_name = first_name.capitalize
+        @last_name = last_name.capitalize
+        @gender = gender.downcase
+        @profession = profession.downcase
     end
 
     def fullname 
-        if title == "doctor"
+        if @profession == "doctor"
             doctor
-        elsif title == "lawyer"
+        elsif @profession == "lawyer"
             lawyer
+        elsif @gender == "male"
+            puts "My name is Mr. #{@first_name} #{@last_name}"
+        elsif @gender == "female"
+            puts "My name is Ms./Mrs. #{@first_name} #{@last_name}"
         else
-            puts " My name is #{@first_name} #{@last_name}"
+            puts "My name is #{@first_name} #{@last_name}"
         end
     end
 
     def doctor
-        puts "Dr. #{first_name} #{last_name}"
+        puts "Dr. #{@first_name} #{@last_name}"
     end
 
     def lawyer
-        puts "#{first_name} #{last_name}, Esq."
+        puts "#{@first_name} #{@last_name}, Esq."
     end
 end
 
-puts "What title do you want to go by?"
-title = gets.chomp
+puts "What is your first name?"
+first_name = gets.chomp
 
-person = Person.new("Sherlock", "Holmes", "male", title)
+puts "What is your last name?"
+last_name = gets.chomp
+
+puts "What is your gender?"
+gender = gets.chomp
+
+puts "What is your profession?"
+profession = gets.chomp
+
+person = Person.new(first_name, last_name, gender, profession)
 
 puts person.fullname
 
